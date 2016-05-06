@@ -1,5 +1,9 @@
 ---
 hibernate:
+    jdbc:
+        use_get_generated_keys: true
+    id:
+        new_generator_mappings: true
     cache:
         queries: false
         use_second_level_cache: true
@@ -30,13 +34,19 @@ environments:
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            pooled: true
-            jmxExport: true
-            driverClassName: org.h2.Driver
-            username: sa
-            password:
-            dbCreate: create-drop
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE
+            dialect: org.hibernate.dialect.Oracle10gDialect
+            jndiName: java:/comp/env/galaxyWeb/etaSandboxDataSource
+            logSql: false
+            dbCreate: update
+
+            # Works on JBoss 6.4.0.GA
+#            pooled: true
+#            jmxExport: true
+#            driverClassName: org.h2.Driver
+#            username: sa
+#            password:
+#            dbCreate: create-drop
+#            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE
 
 #            properties:
 #                jmxEnabled: true
