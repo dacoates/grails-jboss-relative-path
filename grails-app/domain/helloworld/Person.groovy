@@ -4,7 +4,7 @@ class Person {
 
     String name
 
-    static constraints = {
+    static mapping = {
         id column:'person_key', generator:'sequence-identity', params:[sequence:'person_key_seq']
     }
 }
